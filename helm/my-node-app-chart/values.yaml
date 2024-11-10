@@ -4,6 +4,6 @@ blue:
     tag: "2dfcf49a6de77712f997ce7700b976858677f945"
 green:
   image:
-    tag: "2dfcf49a6de77712f997ce7700b976858677f945"
+    tag: "4b4894edf862c9165a522190c8ab2a0f874616d0"
 image:
   repository: ifeolaitan/my-node-app
