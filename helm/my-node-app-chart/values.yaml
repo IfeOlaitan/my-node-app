@@ -1,7 +1,7 @@
-activeVersion: green
+activeVersion: blue
 blue:
   image:
-    tag: "0b25df3d570834a96d0df88f053674a049f4ba04" # your current working version
+    tag: "2dfcf49a6de77712f997ce7700b976858677f945" # your current working version
 green:
   image:
     tag: "0b25df3d570834a96d0df88f053674a049f4ba04" # will be updated with new versions
