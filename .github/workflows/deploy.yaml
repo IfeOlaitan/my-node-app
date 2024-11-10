@@ -2,10 +2,14 @@ name: Deploy with Blue-Green
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - 'feat/**'  # Add feature branches
     paths-ignore:
       - '**.md'
       - 'helm/**'
+  pull_request:
+    branches: [ main ]
 
 jobs:
   push:
@@ -32,6 +36,8 @@ jobs:
     name: Deploy with Helm and Blue-Green Switch
     needs: push
     runs-on: ubuntu-latest
+    # Only run deployment steps on main branch
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
