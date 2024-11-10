@@ -1,5 +1,5 @@
 replicaCount: 2
 image:
   repository: ifeolaitan/my-node-app
-  tag: "5524447f42a64f35b6c22b681aad7e1ae6e0ce10"
-activeVersion: green
+  tag: "e50632f2c72f7b10dd5428e0cc26c158c2213cd0"
+activeVersion: blue
