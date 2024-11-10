@@ -2,14 +2,10 @@ name: Deploy with Blue-Green
 
 on:
   push:
-    branches:
-      - main
-      - 'feat/**'  # Add feature branches
+    branches: [ main ]
     paths-ignore:
       - '**.md'
       - 'helm/**'
-  pull_request:
-    branches: [ main ]
 
 jobs:
   push:
@@ -36,8 +32,6 @@ jobs:
     name: Deploy with Helm and Blue-Green Switch
     needs: push
     runs-on: ubuntu-latest
-    # Only run deployment steps on main branch
-    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -47,10 +41,15 @@ jobs:
       - name: Update Helm values with new image
         run: |
           cd helm/my-node-app-chart
-          yq eval '.image.repository = "${{ secrets.DOCKERHUB_USERNAME }}/my-node-app"' -i values.yaml
-          yq eval '.image.tag = "${{ github.sha }}"' -i values.yaml
+          current_version=$(yq eval '.activeVersion' values.yaml)
+          if [ "$current_version" = "blue" ]; then
+            # Update green with new version
+            yq eval '.green.image.tag = "${{ github.sha }}"' -i values.yaml
+          else
+            # Update blue with new version
+            yq eval '.blue.image.tag = "${{ github.sha }}"' -i values.yaml
+          fi
 
-      # Script switches the activeVersion between blue and green deployments.
       - name: Switch active version (Blue-Green)
         run: |
           cd helm/my-node-app-chart
@@ -65,5 +64,5 @@ jobs:
           git config --global user.name 'IfeOlaitan'
           git config --global user.email 'ifeoluwa1201@gmail.com'
           git add helm/my-node-app-chart/values.yaml
-          git commit -m "Update image tag and switch active version to ${{ github.sha }}"
+          git commit -m "Update image tag and switch active version for ${{ github.sha }}"
           git push

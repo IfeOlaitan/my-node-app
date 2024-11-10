@@ -1,5 +1,9 @@
-replicaCount: 2
+activeVersion: blue
+blue:
+  image:
+    tag: "ee6f2e96bd2aa07332aa84304d5aedd0d4eb6d0f"  # your current working version
+green:
+  image:
+    tag: "ee6f2e96bd2aa07332aa84304d5aedd0d4eb6d0f"  # will be updated with new versions
 image:
   repository: ifeolaitan/my-node-app
-  tag: "ee6f2e96bd2aa07332aa84304d5aedd0d4eb6d0f"
-activeVersion: blue
