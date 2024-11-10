@@ -50,19 +50,10 @@ jobs:
             yq eval '.blue.image.tag = "${{ github.sha }}"' -i values.yaml
           fi
 
-      - name: Switch active version (Blue-Green)
-        run: |
-          cd helm/my-node-app-chart
-          if yq eval '.activeVersion' values.yaml | grep -q 'blue'; then
-            yq eval '.activeVersion = "green"' -i values.yaml
-          else
-            yq eval '.activeVersion = "blue"' -i values.yaml
-          fi
-
       - name: Commit and push updated values
         run: |
           git config --global user.name 'IfeOlaitan'
           git config --global user.email 'ifeoluwa1201@gmail.com'
           git add helm/my-node-app-chart/values.yaml
-          git commit -m "Update image tag and switch active version for ${{ github.sha }}"
+          git commit -m "Update image tag for ${{ github.sha }}"
           git push
