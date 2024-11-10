@@ -9,6 +9,6 @@ spec:
     app: my-node-app
     version: {{ .Values.activeVersion }}
   ports:
-    - port: 81
+    - port: 88
       targetPort: 3000
       protocol: TCP
