@@ -134,7 +134,7 @@ scrollContainer.scrollLeft =
           <p id="hmre2">
             {" "}
             <span id="hmre46">Connectin</span>g Talents worldwide: your next Gig
-            awaits you today.
+            awaits you today and now.
           </p>
         </div>
 
